@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Полезности | Vietnam Trip 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .back-link {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+        }
+
+        .header-small {
+            padding: 40px 20px 60px;
+        }
+
+        .header-small h1 {
+            font-size: 2.5rem;
+        }
+
+        .nav-link.active {
+            background: var(--pink-light);
+            color: var(--pink-dark);
+        }
+
+        .tip-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .tip-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+        }
+
+        .tip-section h2 i {
+            color: var(--pink-main);
+        }
+
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-card {
+            background: var(--pink-light);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .tip-card.blue {
+            background: var(--blue-light);
+        }
+
+        .tip-card.green {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        }
+
+        .tip-card.yellow {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+        }
+
+        .tip-card.purple {
+            background: var(--purple-light);
+        }
+
+        .tip-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tip-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .tip-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tip-card li {
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tip-card li:last-child {
+            border-bottom: none;
+        }
+
+        .tip-card .price {
+            font-weight: 600;
+            color: var(--pink-dark);
+        }
+
+        .phrase-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .phrase-viet {
+            font-weight: 600;
+            color: var(--pink-dark);
+            font-size: 1.1rem;
+        }
+
+        .phrase-meaning {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .phrase-pronunciation {
+            color: var(--text-dark);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        .size-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .size-table th, .size-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .size-table th {
+            background: var(--pink-main);
+            color: white;
+            font-weight: 600;
+        }
+
+        .size-table tr:nth-child(even) {
+            background: var(--pink-light);
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .warning-box i {
+            font-size: 1.5rem;
+            color: #c62828;
+        }
+
+        .warning-box h4 {
+            margin-bottom: 8px;
+            color: #c62828;
+        }
+
+        .warning-box p {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .app-badges {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .app-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 12px 18px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .app-badge i {
+            font-size: 1.5rem;
+        }
+
+        .app-badge.grab i { color: #00b14f; }
+        .app-badge.shopee i { color: #ee4d2d; }
+
+        .app-badge span {
+            font-weight: 500;
+        }
+
+        .quick-tips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .quick-tip {
+            background: white;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .quick-tip i {
+            color: var(--pink-main);
+        }
+
+        .bargain-steps {
+            counter-reset: step;
+        }
+
+        .bargain-step {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px dashed var(--blue-main);
+        }
+
+        .bargain-step:last-child {
+            border-bottom: none;
+        }
+
+        .bargain-step::before {
+            counter-increment: step;
+            content: counter(step);
+            width: 30px;
+            height: 30px;
+            background: var(--pink-main);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header header-small">
+        <div class="header-content">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Назад к маршруту</a>
+            <div class="header-decoration"><i class="fas fa-lightbulb"></i></div>
+            <h1>Полезности</h1>
+            <p class="subtitle">Всё что нужно знать для шоппинга</p>
+        </div>
+        <div class="header-wave">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path d="M0,64 C480,150 960,-20 1440,64 L1440,120 L0,120 Z" fill="#fff5f8"/>
+            </svg>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Главная</a>
+            <a href="nhatrang.html" class="nav-link"><i class="fas fa-umbrella-beach"></i> Нячанг</a>
+            <a href="hochiminh.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Хошимин</a>
+            <a href="tips.html" class="nav-link active"><i class="fas fa-lightbulb"></i> Полезности</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+
+        <!-- Payment Section -->
+        <section class="section">
+            <div class="tip-section">
+                <h2><i class="fas fa-credit-card"></i> Оплата</h2>
+
+                <div class="tip-grid">
+                    <div class="tip-card green">
+                        <h3><i class="fas fa-check-circle"></i> Где принимают карты</h3>
+                        <ul>
+                            <li><span>ТЦ (Vincom, Parkson)</span> <span class="price"><i class="fas fa-credit-card"></i></span></li>
+                            <li><span>MUJI</span> <span class="price"><i class="fas fa-credit-card"></i></span></li>
+                            <li><span>Сетевые кафе</span> <span class="price"><i class="fas fa-credit-card"></i></span></li>
+                            <li><span>Крупные магазины</span> <span class="price"><i class="fas fa-credit-card"></i></span></li>
+                        </ul>
+                    </div>
+
+                    <div class="tip-card yellow">
+                        <h3><i class="fas fa-money-bill"></i> Только наличные!</h3>
+                        <ul>
+                            <li><span>An Dong Market</span> <span class="price">Cash</span></li>
+                            <li><span>Рынки и базары</span> <span class="price">Cash</span></li>
+                            <li><span>Уличные магазины</span> <span class="price">Cash</span></li>
+                            <li><span>Мелкие бутики в chung cư</span> <span class="price">Cash</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="tip-card blue">
+                        <h3><i class="fas fa-exchange-alt"></i> Курс</h3>
+                        <p>
+                            <strong>$1 ≈ 25,000 ₫</strong><br><br>
+                            Быстрый пересчёт:<br>
+                            • 100,000 ₫ ≈ $4<br>
+                            • 250,000 ₫ ≈ $10<br>
+                            • 500,000 ₫ ≈ $20<br>
+                            • 1,000,000 ₫ ≈ $40
+                        </p>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <h4>Важно!</h4>
+                        <p>Всегда имей при себе <strong>наличные</strong> — минимум 500,000–1,000,000 ₫ на день шоппинга. Многие классные места не принимают карты!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bargaining Section -->
+        <section class="section">
+            <div class="tip-section">
+                <h2><i class="fas fa-comments-dollar"></i> Как торговаться</h2>
+
+                <div class="tip-card" style="margin-bottom: 20px;">
+                    <h3><i class="fas fa-map-marker-alt"></i> Где торговаться</h3>
+                    <div class="quick-tips">
+                        <span class="quick-tip"><i class="fas fa-check"></i> An Dong Market</span>
+                        <span class="quick-tip"><i class="fas fa-check"></i> Рынки</span>
+                        <span class="quick-tip"><i class="fas fa-check"></i> Уличные магазины</span>
+                        <span class="quick-tip"><i class="fas fa-times" style="color: #c62828;"></i> ТЦ — фиксированные цены</span>
+                        <span class="quick-tip"><i class="fas fa-times" style="color: #c62828;"></i> MUJI — фиксированные цены</span>
+                    </div>
+                </div>
+
+                <div class="tip-card blue">
+                    <h3><i class="fas fa-list-ol"></i> Пошаговая инструкция</h3>
+                    <div class="bargain-steps">
+                        <div class="bargain-step">
+                            <div>Спроси цену, но <strong>не показывай интерес</strong></div>
+                        </div>
+                        <div class="bargain-step">
+                            <div>Предложи <strong>50% от названной цены</strong></div>
+                        </div>
+                        <div class="bargain-step">
+                            <div>Продавец назовёт среднюю — торгуйся дальше</div>
+                        </div>
+                        <div class="bargain-step">
+                            <div>Если берёшь несколько — проси <strong>"discount for many"</strong></div>
+                        </div>
+                        <div class="bargain-step">
+                            <div>Финальный приём — начни уходить. Часто догонят!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-grid" style="margin-top: 20px;">
+                    <div class="tip-card green">
+                        <h3><i class="fas fa-thumbs-up"></i> Фразы для торга</h3>
+                        <p>
+                            <strong>"Too expensive!"</strong> — Слишком дорого!<br><br>
+                            <strong>"Can you give discount?"</strong> — Можно скидку?<br><br>
+                            <strong>"I buy many, cheaper please"</strong> — Беру много, дешевле!<br><br>
+                            <strong>"Last price?"</strong> — Какая финальная цена?
+                        </p>
+                    </div>
+
+                    <div class="tip-card yellow">
+                        <h3><i class="fas fa-lightbulb"></i> Лайфхаки</h3>
+                        <p>
+                            <i class="fas fa-check"></i> Улыбайся — торг это игра!<br><br>
+                            <i class="fas fa-check"></i> Показывай калькулятор телефона<br><br>
+                            <i class="fas fa-check"></i> Говори "cash" — иногда дают скидку<br><br>
+                            <i class="fas fa-check"></i> Приходи перед закрытием — продавцы сговорчивее
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sizes Section -->
+        <section class="section">
+            <div class="tip-section">
+                <h2><i class="fas fa-ruler"></i> Размеры</h2>
+
+                <div class="tip-card yellow" style="margin-bottom: 20px;">
+                    <h3><i class="fas fa-exclamation-circle"></i> Важно знать</h3>
+                    <p>
+                        Вьетнамские размеры <strong>маленькие!</strong> Локальные бутики обычно шьют на XS-M. Если носишь L-XL — иди в <strong>Vincom</strong> (Zara, H&M, Mango) или <strong>MUJI</strong>.
+                    </p>
+                </div>
+
+                <div class="tip-card">
+                    <h3><i class="fas fa-female"></i> Таблица женских размеров</h3>
+                    <table class="size-table">
+                        <tr>
+                            <th>Вьетнам</th>
+                            <th>Международный</th>
+                            <th>Россия</th>
+                        </tr>
+                        <tr>
+                            <td>S</td>
+                            <td>XS-S</td>
+                            <td>40-42</td>
+                        </tr>
+                        <tr>
+                            <td>M</td>
+                            <td>S-M</td>
+                            <td>42-44</td>
+                        </tr>
+                        <tr>
+                            <td>L</td>
+                            <td>M</td>
+                            <td>44-46</td>
+                        </tr>
+                        <tr>
+                            <td>XL</td>
+                            <td>M-L</td>
+                            <td>46-48</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="tip-card blue" style="margin-top: 20px;">
+                    <h3><i class="fas fa-shoe-prints"></i> Размеры обуви</h3>
+                    <table class="size-table">
+                        <tr>
+                            <th>Вьетнам/Азия</th>
+                            <th>EU</th>
+                            <th>Россия</th>
+                        </tr>
+                        <tr>
+                            <td>35</td>
+                            <td>35</td>
+                            <td>34</td>
+                        </tr>
+                        <tr>
+                            <td>36</td>
+                            <td>36</td>
+                            <td>35</td>
+                        </tr>
+                        <tr>
+                            <td>37</td>
+                            <td>37</td>
+                            <td>36</td>
+                        </tr>
+                        <tr>
+                            <td>38</td>
+                            <td>38</td>
+                            <td>37</td>
+                        </tr>
+                        <tr>
+                            <td>39</td>
+                            <td>39</td>
+                            <td>38</td>
+                        </tr>
+                        <tr>
+                            <td>40</td>
+                            <td>40</td>
+                            <td>39</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transport Section -->
+        <section class="section">
+            <div class="tip-section">
+                <h2><i class="fas fa-taxi"></i> Транспорт</h2>
+
+                <div class="tip-grid">
+                    <div class="tip-card green">
+                        <h3><i class="fas fa-mobile-alt"></i> Grab — твой друг!</h3>
+                        <p>
+                            Главное приложение для такси во Вьетнаме. Как Uber, только лучше!<br><br>
+                            <strong>Grab Bike</strong> — мотобайк, дешевле и быстрее<br>
+                            <strong>Grab Car</strong> — машина, комфортнее
+                        </p>
+                        <div class="app-badges">
+                            <div class="app-badge grab">
+                                <i class="fas fa-motorcycle"></i>
+                                <span>Grab</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tip-card">
+                        <h3><i class="fas fa-coins"></i> Примерные цены</h3>
+                        <ul>
+                            <li><span>D5 → D1 (Grab Bike)</span> <span class="price">~25,000 ₫</span></li>
+                            <li><span>D5 → D1 (Grab Car)</span> <span class="price">~50,000 ₫</span></li>
+                            <li><span>D3 → Phú Nhuận</span> <span class="price">~20-35,000 ₫</span></li>
+                            <li><span>Центр → Автовокзал</span> <span class="price">~50,000 ₫</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="tip-card blue">
+                        <h3><i class="fas fa-subway"></i> Метро (Линия 1)</h3>
+                        <p>
+                            Открылось в декабре 2024!<br><br>
+                            <strong>Bến Thành ↔ Suối Tiên</strong><br>
+                            14 станций, 5:00 – 22:00<br><br>
+                            Билет: <strong>7,000 – 20,000 ₫</strong>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="tip-card yellow" style="margin-top: 20px;">
+                    <h3><i class="fas fa-bus"></i> Автобус Бенче ↔ Хошимин</h3>
+                    <ul>
+                        <li><span>Время в пути</span> <span class="price">2-2.5 часа</span></li>
+                        <li><span>Автовокзал</span> <span class="price">Miền Tây (D6) или D5</span></li>
+                        <li><span>Выезд утром</span> <span class="price">~7:00-8:00</span></li>
+                        <li><span>Обратно</span> <span class="price">~18:00-19:00</span></li>
+                        <li><span>Время на город</span> <span class="price">~8 часов</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vietnamese Phrases Section -->
+        <section class="section">
+            <div class="tip-section">
+                <h2><i class="fas fa-language"></i> Вьетнамские фразы</h2>
+
+                <p style="margin-bottom: 20px; color: var(--text-light);">Вьетнамцы очень ценят когда иностранцы пытаются говорить на их языке! Даже простое "xin chào" вызывает улыбки.</p>
+
+                <div class="phrase-card">
+                    <div>
+                        <div class="phrase-viet">Xin chào</div>
+                        <div class="phrase-pronunciation">син чао</div>
+                    </div>
+                    <div class="phrase-meaning">Привет</div>
+                </div>
+
+                <div class="phrase-card">
+                    <div>
+                        <div class="phrase-viet">Cảm ơn</div>
+                        <div class="phrase-pronunciation">кам он</div>
+                    </div>
+                    <div class="phrase-meaning">Спасибо</div>
+                </div>
+
+                <div class="phrase-card">
+                    <div>
+                        <div class="phrase-viet">Bao nhiêu?</div>
+                        <div class="phrase-pronunciation">бао ньеу?</div>
+                    </div>
+                    <div class="phrase-meaning">Сколько стоит?</div>
+                </div>
+
+                <div class="phrase-card">
+                    <div>
+                        <div class="phrase-viet">Đắt quá!</div>
+                        <div class="phrase-pronunciation">дат куа!</div>
+                    </div>
+                    <div class="phrase-meaning">Слишком дорого!</div>
+                </div>
+
+                <div class="phrase-card">
+                    <div>
+                        <div class="phrase-viet">Giảm giá được không?</div>
+                        <div class="phrase-pronunciation">зям за дыок конг?</div>
+                    </div>
+                    <div class="phrase-meaning">Можно скидку?</div>
+                </div>
+
+                <div class="phrase-card">
+                    <div>
+                        <div class="phrase-viet">Cho tôi cái này</div>
+                        <div class="phrase-pronunciation">чо той кай най</div>
+                    </div>
+                    <div class="phrase-meaning">Дайте мне это</div>
+                </div>
+
+                <div class="phrase-card">
+                    <div>
+                        <div class="phrase-viet">Tôi không hiểu</div>
+                        <div class="phrase-pronunciation">той конг хьеу</div>
+                    </div>
+                    <div class="phrase-meaning">Я не понимаю</div>
+                </div>
+
+                <div class="phrase-card">
+                    <div>
+                        <div class="phrase-viet">Ngon quá!</div>
+                        <div class="phrase-pronunciation">нгон куа!</div>
+                    </div>
+                    <div class="phrase-meaning">Очень вкусно!</div>
+                </div>
+
+                <div class="tip-card green" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Лайфхак</h3>
+                    <p>
+                        Показывай цену на калькуляторе телефона — это универсальный язык! Продавец покажет свою цену тем же способом.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Apps Section -->
+        <section class="section">
+            <div class="tip-section">
+                <h2><i class="fas fa-mobile-alt"></i> Полезные приложения</h2>
+
+                <div class="tip-grid">
+                    <div class="tip-card">
+                        <h3><i class="fas fa-taxi" style="color: #00b14f;"></i> Grab</h3>
+                        <p>
+                            Такси, мотобайки, доставка еды. <strong>Обязательно скачай!</strong> Оплата наличными или картой.
+                        </p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h3><i class="fas fa-map" style="color: #4285f4;"></i> Google Maps</h3>
+                        <p>
+                            Навигация, поиск мест, отзывы. Работает отлично во Вьетнаме!
+                        </p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h3><i class="fas fa-language" style="color: #4285f4;"></i> Google Translate</h3>
+                        <p>
+                            Переводчик с камерой — наведи на текст и увидишь перевод. Магия!
+                        </p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h3><i class="fas fa-shopping-cart" style="color: #ee4d2d;"></i> Shopee</h3>
+                        <p>
+                            Если хочешь заказать что-то с доставкой в отель. Огромный выбор!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Tips Section -->
+        <section class="section">
+            <div class="tip-section">
+                <h2><i class="fas fa-star"></i> Быстрые советы</h2>
+
+                <div class="tip-grid">
+                    <div class="tip-card purple">
+                        <h3><i class="fas fa-tshirt"></i> Одежда</h3>
+                        <p>
+                            <i class="fas fa-check"></i> Примеряй всё — размеры нестандартные<br>
+                            <i class="fas fa-check"></i> Смотри швы и качество ткани<br>
+                            <i class="fas fa-check"></i> Фоткай ценники для сравнения<br>
+                            <i class="fas fa-check"></i> Не бойся уходить без покупки
+                        </p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h3><i class="fas fa-sun"></i> Погода</h3>
+                        <p>
+                            <i class="fas fa-check"></i> Февраль-март — сухой сезон<br>
+                            <i class="fas fa-check"></i> Днём жарко (30-35°C)<br>
+                            <i class="fas fa-check"></i> Носи лёгкую одежду<br>
+                            <i class="fas fa-check"></i> Бери воду везде!
+                        </p>
+                    </div>
+
+                    <div class="tip-card green">
+                        <h3><i class="fas fa-utensils"></i> Еда</h3>
+                        <p>
+                            <i class="fas fa-check"></i> Пей только бутилированную воду<br>
+                            <i class="fas fa-check"></i> Уличная еда — безопасна если горячая<br>
+                            <i class="fas fa-check"></i> Пробуй всё! Вьетнамская кухня — топ<br>
+                            <i class="fas fa-check"></i> Кофе здесь невероятный
+                        </p>
+                    </div>
+
+                    <div class="tip-card yellow">
+                        <h3><i class="fas fa-camera"></i> Фото</h3>
+                        <p>
+                            <i class="fas fa-check"></i> Спрашивай разрешение у людей<br>
+                            <i class="fas fa-check"></i> Лучший свет — утро и закат<br>
+                            <i class="fas fa-check"></i> В храмах не фоткай со вспышкой<br>
+                            <i class="fas fa-check"></i> Заряжай телефон с утра!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Vietnam Trip 2025 <i class="fas fa-heart"></i></p>
+            <p class="footer-small">Приятного путешествия!</p>
+        </div>
+    </footer>
+
+</body>
+</html>
