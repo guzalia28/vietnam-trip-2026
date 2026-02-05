@@ -163,7 +163,7 @@
 
         .location-photo {
             width: 100%;
-            height: 220px;
+            height: 320px;
             object-fit: cover;
         }
 
@@ -176,14 +176,14 @@
 
         .location-photo-grid img {
             width: 100%;
-            height: 150px;
+            height: 200px;
             object-fit: cover;
             border-radius: 12px;
         }
 
         .photo-single {
             width: 100%;
-            height: 200px;
+            height: 280px;
             object-fit: cover;
             border-radius: 12px;
             margin-bottom: 20px;
@@ -2056,11 +2056,27 @@
             });
         }
 
+        // Bus station icon (green)
+        function createBusIcon() {
+            return L.divIcon({
+                className: 'custom-marker',
+                html: `<div style="background: linear-gradient(135deg, #4caf50, #2e7d32); width: 32px; height: 32px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 3px 8px rgba(0,0,0,0.3);"><span style="display: block; transform: rotate(45deg); text-align: center; line-height: 26px; color: white; font-size: 14px;">🚌</span></div>`,
+                iconSize: [32, 32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -32]
+            });
+        }
+
         // Day 1 Map - District 1
-        const map1 = L.map('map1').setView([10.7769, 106.7009], 15);
+        const map1 = L.map('map1').setView([10.7740, 106.7020], 15);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap'
         }).addTo(map1);
+
+        // Bus station for Day 1 (Miền Tây - start/end point)
+        L.marker([10.7380, 106.6200], { icon: createBusIcon() })
+            .addTo(map1)
+            .bindPopup(`<b>🚌 Автовокзал Miền Tây</b><br>Старт и финиш дня`);
 
         const day1Locations = [
             { lat: 10.7769, lng: 106.7009, name: "26 Lý Tự Trọng", num: 1 },
@@ -2084,18 +2100,23 @@
         L.polyline(day1Route, { color: '#ff6b9d', weight: 3, dashArray: '10, 10', opacity: 0.7 }).addTo(map1);
 
         // Day 2 Map - District 5, 3, Phu Nhuan
-        const map2 = L.map('map2').setView([10.7600, 106.6800], 13);
+        const map2 = L.map('map2').setView([10.7650, 106.6700], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap'
         }).addTo(map2);
 
+        // Bus station for Day 2 (District 5 - closer to An Dong)
+        L.marker([10.7380, 106.6200], { icon: createBusIcon() })
+            .addTo(map2)
+            .bindPopup(`<b>🚌 Автовокзал Miền Tây</b><br>Старт и финиш дня`);
+
         const day2Locations = [
             { lat: 10.7540, lng: 106.6580, name: "An Dong Market", num: 1 },
-            { lat: 10.7550, lng: 106.6600, name: "Thiên Hậu Temple", num: 2 },
-            { lat: 10.7600, lng: 106.6700, name: "Nguyễn Trãi Street", num: 3 },
-            { lat: 10.7750, lng: 106.6850, name: "Trần Quang Diệu", num: 4 },
-            { lat: 10.7780, lng: 106.6870, name: "Nguyen Dinh Chieu", num: 5 },
-            { lat: 10.7950, lng: 106.6750, name: "Oasis Cafe", num: 6 }
+            { lat: 10.7555, lng: 106.6620, name: "Thiên Hậu Temple", num: 2 },
+            { lat: 10.7580, lng: 106.6680, name: "Nguyễn Trãi Street", num: 3 },
+            { lat: 10.7820, lng: 106.6830, name: "Trần Quang Diệu", num: 4 },
+            { lat: 10.7840, lng: 106.6850, name: "Nguyen Dinh Chieu", num: 5 },
+            { lat: 10.7980, lng: 106.6720, name: "Oasis Cafe", num: 6 }
         ];
 
         day2Locations.forEach(loc => {
