@@ -457,6 +457,35 @@
             margin-top: 15px;
         }
 
+        .day-map {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .day-map h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .day-map #map1, .day-map #map2 {
+            height: 350px;
+            border-radius: 12px;
+        }
+
+        .leaflet-popup-content {
+            font-family: 'Comfortaa', sans-serif;
+        }
+
+        .map-marker-label {
+            font-weight: 600;
+            color: var(--pink-dark);
+        }
+
         .photo-spot {
             background: white;
             padding: 8px 15px;
@@ -589,6 +618,12 @@
                         <span class="overview-duration"></span>
                     </div>
                 </div>
+            </div>
+
+            <!-- Day 1 Map -->
+            <div class="day-map">
+                <h3><i class="fas fa-map-marked-alt"></i> Карта маршрута</h3>
+                <div id="map1"></div>
             </div>
 
             <!-- Location 1: 26 Ly Tu Trong -->
@@ -1266,6 +1301,12 @@
                 </div>
             </div>
 
+            <!-- Day 2 Map -->
+            <div class="day-map">
+                <h3><i class="fas fa-map-marked-alt"></i> Карта маршрута</h3>
+                <div id="map2"></div>
+            </div>
+
             <!-- Location 1: Thien Hau Temple -->
             <div class="location-card">
                 <img src="https://travelsaigon.org/wp-content/uploads/thien-hau-temple-1-1.jpg" alt="Thiên Hậu Temple Cholon" class="location-photo">
@@ -1848,6 +1889,7 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1864,6 +1906,75 @@
                 }
             });
         });
+
+        // Custom pink marker icon
+        const pinkIcon = L.divIcon({
+            className: 'custom-marker',
+            html: '<div style="background: linear-gradient(135deg, #ff6b9d, #c44569); width: 30px; height: 30px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"><span style="display: block; transform: rotate(45deg); text-align: center; line-height: 24px; color: white; font-weight: bold; font-size: 12px;">{{num}}</span></div>',
+            iconSize: [30, 30],
+            iconAnchor: [15, 30],
+            popupAnchor: [0, -30]
+        });
+
+        function createNumberedIcon(num) {
+            return L.divIcon({
+                className: 'custom-marker',
+                html: `<div style="background: linear-gradient(135deg, #ff6b9d, #c44569); width: 32px; height: 32px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 3px 8px rgba(0,0,0,0.3);"><span style="display: block; transform: rotate(45deg); text-align: center; line-height: 26px; color: white; font-weight: bold; font-size: 14px;">${num}</span></div>`,
+                iconSize: [32, 32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -32]
+            });
+        }
+
+        // Day 1 Map - District 1
+        const map1 = L.map('map1').setView([10.7769, 106.7009], 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map1);
+
+        const day1Locations = [
+            { lat: 10.7769, lng: 106.7009, name: "26 Lý Tự Trọng", num: 1 },
+            { lat: 10.7735, lng: 106.7010, name: "SOKO Cafe", num: "☕" },
+            { lat: 10.7745, lng: 106.7020, name: "MUJI + Vincom", num: 2 },
+            { lat: 10.7725, lng: 106.6995, name: "42 Tôn Thất Thiệp", num: 3 },
+            { lat: 10.7740, lng: 106.7045, name: "Cafe Apartment", num: 4 },
+            { lat: 10.7715, lng: 106.7045, name: "Bitexco Skydeck", num: 5 }
+        ];
+
+        day1Locations.forEach(loc => {
+            L.marker([loc.lat, loc.lng], { icon: createNumberedIcon(loc.num) })
+                .addTo(map1)
+                .bindPopup(`<b>${loc.name}</b>`);
+        });
+
+        // Draw route line for Day 1
+        const day1Route = day1Locations.map(loc => [loc.lat, loc.lng]);
+        L.polyline(day1Route, { color: '#ff6b9d', weight: 3, dashArray: '10, 10', opacity: 0.7 }).addTo(map1);
+
+        // Day 2 Map - District 5, 3, Phu Nhuan
+        const map2 = L.map('map2').setView([10.7600, 106.6800], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map2);
+
+        const day2Locations = [
+            { lat: 10.7550, lng: 106.6600, name: "Thiên Hậu Temple", num: 1 },
+            { lat: 10.7540, lng: 106.6580, name: "An Dong Market", num: 2 },
+            { lat: 10.7600, lng: 106.6700, name: "Nguyễn Trãi Street", num: 3 },
+            { lat: 10.7750, lng: 106.6850, name: "Trần Quang Diệu", num: 4 },
+            { lat: 10.7780, lng: 106.6870, name: "Nguyen Dinh Chieu", num: 5 },
+            { lat: 10.7950, lng: 106.6750, name: "Oasis Cafe", num: 6 }
+        ];
+
+        day2Locations.forEach(loc => {
+            L.marker([loc.lat, loc.lng], { icon: createNumberedIcon(loc.num) })
+                .addTo(map2)
+                .bindPopup(`<b>${loc.name}</b>`);
+        });
+
+        // Draw route line for Day 2
+        const day2Route = day2Locations.map(loc => [loc.lat, loc.lng]);
+        L.polyline(day2Route, { color: '#ffa94d', weight: 3, dashArray: '10, 10', opacity: 0.7 }).addTo(map2);
     </script>
 
 </body>
