@@ -9,6 +9,558 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .day-header {
+            background: linear-gradient(135deg, var(--pink-main) 0%, var(--blue-main) 100%);
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .day-header h2 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .day-header .day-subtitle {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .day-overview {
+            background: var(--blue-light);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .day-overview h3 {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .overview-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .overview-item {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            padding: 10px 15px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .overview-time {
+            font-weight: 600;
+            color: var(--pink-dark);
+            min-width: 70px;
+        }
+
+        .overview-place {
+            flex: 1;
+        }
+
+        .overview-duration {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .location-card {
+            background: white;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+        }
+
+        .location-header {
+            background: linear-gradient(135deg, var(--pink-light) 0%, var(--purple-light) 100%);
+            padding: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .location-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--pink-main), var(--pink-dark));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .location-title h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .location-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .location-badge {
+            background: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .location-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .location-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .location-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .location-link.maps {
+            background: #4285f4;
+            color: white;
+        }
+
+        .location-body {
+            padding: 25px;
+        }
+
+        .location-desc {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            background: var(--pink-light);
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .info-item-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .info-item-value {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .tip-box.blue {
+            background: linear-gradient(135deg, var(--blue-light), #d4edfc);
+        }
+
+        .tip-box.green {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        }
+
+        .tip-icon {
+            font-size: 1.5rem;
+        }
+
+        .tip-content h5 {
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .tip-content p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .food-recommendation {
+            background: var(--mint);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .food-recommendation h4 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .food-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #4caf50;
+        }
+
+        .food-item:last-child {
+            border-bottom: none;
+        }
+
+        .food-name {
+            font-weight: 500;
+        }
+
+        .food-price {
+            color: #2e7d32;
+        }
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+        }
+
+        .header-small {
+            padding: 40px 20px 60px;
+        }
+
+        .header-small h1 {
+            font-size: 2.5rem;
+        }
+
+        .nav-link.active {
+            background: var(--pink-light);
+            color: var(--pink-dark);
+        }
+
+        .section-divider {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .section-divider span {
+            font-size: 2rem;
+        }
+
+        .shop-list {
+            margin-bottom: 20px;
+        }
+
+        .shop-list h4 {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .shop-item {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .shop-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .shop-name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .shop-tag {
+            background: var(--pink-main);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+        }
+
+        .shop-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .price-table th {
+            background: linear-gradient(135deg, var(--pink-main), var(--pink-dark));
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+
+        .price-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--pink-light);
+            font-size: 0.9rem;
+        }
+
+        .price-table tr:nth-child(even) {
+            background: var(--pink-light);
+        }
+
+        .price-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .variant-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .variant-table th {
+            background: linear-gradient(135deg, var(--blue-main), var(--blue-dark));
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+
+        .variant-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--blue-light);
+            font-size: 0.85rem;
+        }
+
+        .variant-table tr:nth-child(even) {
+            background: var(--blue-light);
+        }
+
+        .useful-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .useful-section h3 {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .useful-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .useful-card {
+            background: var(--pink-light);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .useful-card h4 {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .useful-card p, .useful-card ul {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .useful-card ul {
+            padding-left: 18px;
+        }
+
+        .useful-card ul li {
+            margin-bottom: 5px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--pink-main), var(--pink-dark));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(255,107,157,0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255,107,157,0.5);
+        }
+
+        /* Quick day nav */
+        .day-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .day-nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 18px 12px;
+            background: white;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            color: var(--text-dark);
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        .day-nav-btn:hover {
+            transform: translateY(-5px);
+            border-color: var(--pink-main);
+        }
+
+        .day-nav-btn .day-num {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--pink-dark);
+        }
+
+        .day-nav-btn .day-theme {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            line-height: 1.3;
+        }
+
+        @media (max-width: 768px) {
+            .day-nav {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .day-nav-btn {
+                padding: 14px 8px;
+            }
+
+            .day-nav-btn .day-num {
+                font-size: 1.2rem;
+            }
+
+            .day-nav-btn .day-theme {
+                font-size: 0.65rem;
+            }
+
+            .overview-item {
+                flex-wrap: wrap;
+            }
+
+            .overview-time {
+                min-width: 60px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .location-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .location-badges {
+                justify-content: center;
+            }
+
+            .location-links {
+                justify-content: center;
+            }
+
+            .price-table, .variant-table {
+                font-size: 0.8rem;
+            }
+
+            .price-table th, .price-table td,
+            .variant-table th, .variant-table td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Floating clouds decoration -->
@@ -29,10 +581,10 @@
             <div class="sparkle"></div>
         </div>
         <div class="header-content">
-            <a href="index.html" class="back-link">← Назад к маршруту</a>
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Назад к маршруту</a>
             <div class="header-decoration">🏖️</div>
             <h1>Нячанг</h1>
-
+            <p class="subtitle">План на 6 дней</p>
         </div>
         <div class="header-wave">
             <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
@@ -44,31 +596,914 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
-            <a href="index.html" class="nav-link">🏠 Главная</a>
-            <a href="nhatrang.html" class="nav-link active">🏖️ Нячанг</a>
-            <a href="hochiminh.html" class="nav-link">🛍️ Хошимин</a>
-            <a href="tips.html" class="nav-link">💡 Полезности</a>
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Главная</a>
+            <a href="nhatrang.html" class="nav-link active"><i class="fas fa-umbrella-beach"></i> Нячанг</a>
+            <a href="hochiminh.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Хошимин</a>
+            <a href="tips.html" class="nav-link"><i class="fas fa-lightbulb"></i> Полезности</a>
         </div>
     </nav>
 
     <main class="main-content">
 
-        <!-- Coming Soon Section -->
+        <!-- Day Navigation -->
         <section class="section">
-            <div class="coming-soon">
-                <div class="coming-soon-icon">🏗️</div>
-                <h2>Скоро здесь будет гайд по Нячангу!</h2>
-                <p>Кафе, рестораны, пляжи, достопримечательности...</p>
-                <div class="coming-soon-tags">
-                    <span class="tag tag-beach">пляжи</span>
-                    <span class="tag tag-cafe">кафе</span>
-                    <span class="tag tag-food">еда</span>
-                    <span class="tag tag-shopping">шоппинг</span>
+            <div class="day-nav">
+                <a href="#day1" class="day-nav-btn">
+                    <span class="day-num">1</span>
+                    <span class="day-theme">Заселение + шопинг</span>
+                </a>
+                <a href="#day2" class="day-nav-btn">
+                    <span class="day-num">2</span>
+                    <span class="day-theme">VinWonders</span>
+                </a>
+                <a href="#day3" class="day-nav-btn">
+                    <span class="day-num">3</span>
+                    <span class="day-theme">Хон Мун + снорклинг</span>
+                </a>
+                <a href="#day4" class="day-nav-btn">
+                    <span class="day-num">4</span>
+                    <span class="day-theme">Док Лет + По Нагар</span>
+                </a>
+                <a href="#day5" class="day-nav-btn">
+                    <span class="day-num">5</span>
+                    <span class="day-theme">Бай Зыонг + храмы</span>
+                </a>
+                <a href="#day6" class="day-nav-btn">
+                    <span class="day-num">6</span>
+                    <span class="day-theme">Пляж + прощальный день</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ==================== ДЕНЬ 1 ==================== -->
+        <section id="day1" class="section">
+
+            <div class="day-header">
+                <h2><i class="fas fa-shopping-bag"></i> День 1</h2>
+                <p class="day-subtitle">Заселение + шопинг + вечерняя прогулка</p>
+            </div>
+
+            <div class="day-overview">
+                <h3><i class="fas fa-clipboard-list"></i> План дня</h3>
+                <div class="overview-timeline">
+                    <div class="overview-item">
+                        <span class="overview-time">Днём</span>
+                        <span class="overview-place"><i class="fas fa-hotel"></i> Заселение в отель</span>
+                        <span class="overview-duration"></span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">15:00</span>
+                        <span class="overview-place"><i class="fas fa-shopping-bag"></i> Шопинг — купальники, круг, пляжные вещи</span>
+                        <span class="overview-duration">2-3ч</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">17:00</span>
+                        <span class="overview-place"><i class="fas fa-store"></i> Ночной рынок + ужин</span>
+                        <span class="overview-duration">3-4ч</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <span class="tip-icon">💡</span>
+                <div class="tip-content">
+                    <h5>Совет</h5>
+                    <p>Лучше закупиться в первый день, чтобы потом только отдыхать. Круги и надувные матрасы дешевле всего в GO!/Lotte Mart (от 30 000-80 000₫). Купальники на рынке — от 100 000₫, в бутиках — от 300 000₫.</p>
+                </div>
+            </div>
+
+            <!-- Где купить пляжные вещи -->
+            <div class="location-card">
+                <div class="location-header">
+                    <div class="location-number">🛍️</div>
+                    <div class="location-title">
+                        <h3>Где купить купальник / круг / пляжные вещи</h3>
+                    </div>
+                </div>
+                <div class="location-body">
+
+                    <div class="shop-list">
+                        <h4>💰 Бюджетно (рынки и магазины):</h4>
+
+                        <div class="shop-item">
+                            <div class="shop-item-header">
+                                <span class="shop-name">Ночной рынок (ул. Tran Phu)</span>
+                                <span class="shop-tag">Рынок</span>
+                            </div>
+                            <p class="shop-desc">Купальники, шорты, шлёпки, круги, матрасы от 50 000-150 000₫. Торгуйтесь!</p>
+                            <div class="location-links">
+                                <a href="https://maps.google.com/?q=Nha+Trang+Night+Market+Tran+Phu" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                            </div>
+                        </div>
+
+                        <div class="shop-item">
+                            <div class="shop-item-header">
+                                <span class="shop-name">Рынок Чо Дам (Dam Market)</span>
+                                <span class="shop-tag">Рынок</span>
+                            </div>
+                            <p class="shop-desc">Огромный крытый рынок, 3 этажа. Одежда, купальники, пляжные вещи, сумки. Работает с раннего утра.</p>
+                            <div class="location-links">
+                                <a href="https://maps.google.com/?q=Dam+Market+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                            </div>
+                        </div>
+
+                        <div class="shop-item">
+                            <div class="shop-item-header">
+                                <span class="shop-name">Ул. Nguyen Thien Thuat</span>
+                                <span class="shop-tag">Улица</span>
+                            </div>
+                            <p class="shop-desc">Мелкие магазины с пляжной одеждой и аксессуарами по низким ценам.</p>
+                            <div class="location-links">
+                                <a href="https://maps.google.com/?q=Nguyen+Thien+Thuat+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shop-list">
+                        <h4>🏬 Торговые центры (кондиционер + всё в одном месте):</h4>
+
+                        <div class="shop-item">
+                            <div class="shop-item-header">
+                                <span class="shop-name">Vincom Plaza</span>
+                                <span class="shop-tag">ТЦ</span>
+                            </div>
+                            <p class="shop-desc">78-80 Tran Phu — одежда, обувь, спортивные бренды. Рядом с пляжем.</p>
+                            <div class="location-links">
+                                <a href="https://maps.google.com/?q=Vincom+Plaza+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                            </div>
+                        </div>
+
+                        <div class="shop-item">
+                            <div class="shop-item-header">
+                                <span class="shop-name">Nha Trang Center</span>
+                                <span class="shop-tag">ТЦ</span>
+                            </div>
+                            <p class="shop-desc">20 Tran Phu — Nike, Adidas, Levi's, Miniso. 4 этажа + супермаркет WinMart.</p>
+                            <div class="location-links">
+                                <a href="https://maps.google.com/?q=Nha+Trang+Center" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                            </div>
+                        </div>
+
+                        <div class="shop-item">
+                            <div class="shop-item-header">
+                                <span class="shop-name">Lotte Mart</span>
+                                <span class="shop-tag">Гипермаркет</span>
+                            </div>
+                            <p class="shop-desc">58 23 Thang 10 — супермаркет + одежда, пляжные товары, круги, крем от солнца. 8:00-22:00.</p>
+                            <div class="location-links">
+                                <a href="https://maps.google.com/?q=Lotte+Mart+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                            </div>
+                        </div>
+
+                        <div class="shop-item">
+                            <div class="shop-item-header">
+                                <span class="shop-name">GO! Nha Trang (бывший Big C)</span>
+                                <span class="shop-tag">Гипермаркет</span>
+                            </div>
+                            <p class="shop-desc">Самый дешёвый для кругов, матрасов, крема, шлёпок.</p>
+                            <div class="location-links">
+                                <a href="https://maps.google.com/?q=GO+Nha+Trang+Big+C" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                            </div>
+                        </div>
+
+                        <div class="shop-item">
+                            <div class="shop-item-header">
+                                <span class="shop-name">Gold Coast Mall</span>
+                                <span class="shop-tag">ТЦ</span>
+                            </div>
+                            <p class="shop-desc">01 Tran Hung Dao — Nike, Calvin Klein, Mango. Внутри тоже Lotte Mart.</p>
+                            <div class="location-links">
+                                <a href="https://maps.google.com/?q=Gold+Coast+Mall+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вечер: Ночной рынок -->
+            <div class="location-card">
+                <div class="location-header" style="background: linear-gradient(135deg, #fff3e0, #ffe0b2);">
+                    <div class="location-number" style="background: linear-gradient(135deg, #ffa726, #f57c00);">🌙</div>
+                    <div class="location-title">
+                        <h3>Вечер: Ночной рынок + ужин</h3>
+                        <div class="location-badges">
+                            <span class="location-badge">17:00-23:00</span>
+                            <span class="location-badge">Напротив башни Лотос</span>
+                        </div>
+                        <div class="location-links">
+                            <a href="https://maps.google.com/?q=Nha+Trang+Night+Market" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-body">
+                    <p class="location-desc">Морепродукты на гриле, сувениры, кофе. Торгуйтесь — цены падают в 1,5-2 раза!</p>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="section-divider"><span>🌙</span></div>
+
+        <!-- ==================== ДЕНЬ 2 ==================== -->
+        <section id="day2" class="section">
+
+            <div class="day-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <h2><i class="fas fa-rocket"></i> День 2</h2>
+                <p class="day-subtitle">Винперл (VinWonders) — парк на острове Хон Тре</p>
+            </div>
+
+            <div class="day-overview">
+                <h3><i class="fas fa-clipboard-list"></i> План дня</h3>
+                <div class="overview-timeline">
+                    <div class="overview-item">
+                        <span class="overview-time">8:00</span>
+                        <span class="overview-place"><i class="fas fa-bus"></i> Бесплатный автобус №23 до порта или Grab ~50-100 000₫</span>
+                        <span class="overview-duration">30 мин</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">8:30</span>
+                        <span class="overview-place"><i class="fas fa-cable-car"></i> Канатная дорога 3 320 м над морем</span>
+                        <span class="overview-duration">15 мин</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">9:00</span>
+                        <span class="overview-place"><i class="fas fa-water"></i> Аквапарк + аттракционы + океанариум</span>
+                        <span class="overview-duration">весь день</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">20:00</span>
+                        <span class="overview-place"><i class="fas fa-fireworks"></i> Шоу + обратно</span>
+                        <span class="overview-duration">1ч</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <div class="location-header" style="background: linear-gradient(135deg, #e8d5ff, #d1c4e9);">
+                    <div class="location-number" style="background: linear-gradient(135deg, #667eea, #764ba2);">🎢</div>
+                    <div class="location-title">
+                        <h3>VinWonders Nha Trang</h3>
+                        <div class="location-badges">
+                            <span class="location-badge">🎟️ ~880 000₫ ($35-38)</span>
+                            <span class="location-badge">🕗 8:30-21:00</span>
+                            <span class="location-badge">🏝️ Остров Хон Тре</span>
+                        </div>
+                        <div class="location-links">
+                            <a href="https://maps.google.com/?q=VinWonders+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-body">
+                    <p class="location-desc">Огромный парк на острове: аттракционы, аквапарк, океанариум, шоу. Канатная дорога над морем включена в билет (есть и катер). В парке есть свой пляж!</p>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-item-label">Билет</div>
+                            <div class="info-item-value">~880 000₫ (~$35-38)</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-item-label">Дети</div>
+                            <div class="info-item-value">Скидка 30-50%</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-item-label">Как добраться</div>
+                            <div class="info-item-value">Автобус №23 (бесплатно) или Grab</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-item-label">Канатка</div>
+                            <div class="info-item-value">3 320 м над морем (включена)</div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <span class="tip-icon">⚠️</span>
+                        <div class="tip-content">
+                            <h5>Важно</h5>
+                            <p>Доплата за: Alpine Coaster, зиплайн. Еду проносить нельзя. Приезжайте к открытию!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="section-divider"><span>🌊</span></div>
+
+        <!-- ==================== ДЕНЬ 3 ==================== -->
+        <section id="day3" class="section">
+
+            <div class="day-header" style="background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);">
+                <h2><i class="fas fa-fish"></i> День 3</h2>
+                <p class="day-subtitle">Острова Хон Мун + снорклинг</p>
+            </div>
+
+            <div class="day-overview">
+                <h3><i class="fas fa-clipboard-list"></i> План дня</h3>
+                <div class="overview-timeline">
+                    <div class="overview-item">
+                        <span class="overview-time">8:00</span>
+                        <span class="overview-place"><i class="fas fa-ship"></i> Выезд на лодке к островам</span>
+                        <span class="overview-duration">1ч</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">9:00</span>
+                        <span class="overview-place"><i class="fas fa-water"></i> Снорклинг — коралловые рифы, тропические рыбки</span>
+                        <span class="overview-duration">4-5ч</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">12:00</span>
+                        <span class="overview-place"><i class="fas fa-utensils"></i> Обед на лодке/острове</span>
+                        <span class="overview-duration">1ч</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">16:00</span>
+                        <span class="overview-place"><i class="fas fa-anchor"></i> Возвращение в Нячанг</span>
+                        <span class="overview-duration">1ч</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">18:00</span>
+                        <span class="overview-place"><i class="fas fa-crab"></i> Крабовый ужин — ул. Cu Lao Trung</span>
+                        <span class="overview-duration">2ч</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Снорклинг -->
+            <div class="location-card">
+                <div class="location-header" style="background: linear-gradient(135deg, #e0f7fa, #b2ebf2);">
+                    <div class="location-number" style="background: linear-gradient(135deg, #00b4d8, #0077b6);">🤿</div>
+                    <div class="location-title">
+                        <h3>Острова Хон Мун — снорклинг</h3>
+                        <div class="location-badges">
+                            <span class="location-badge">🐠 Коралловые рифы</span>
+                            <span class="location-badge">💎 Прозрачная вода</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-body">
+                    <p class="location-desc">Главный морской день — коралловые рифы, прозрачная вода, тропические рыбки.</p>
+
+                    <table class="variant-table">
+                        <thead>
+                            <tr>
+                                <th>Вариант</th>
+                                <th>Цена</th>
+                                <th>Что включено</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Самостоятельно с порта Кау Да</td>
+                                <td>~250-300 тыс. ₫/чел</td>
+                                <td>Только лодка</td>
+                            </tr>
+                            <tr>
+                                <td>Групповой тур (Klook/Viator)</td>
+                                <td>$15-25</td>
+                                <td>Трансфер, снорклинг, обед</td>
+                            </tr>
+                            <tr>
+                                <td>На пристани утром (Vinh Truong, к 8:00)</td>
+                                <td>400-600 тыс. ₫</td>
+                                <td>Лодка, обед, снаряжение</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="tip-box blue">
+                        <span class="tip-icon">📋</span>
+                        <div class="tip-content">
+                            <h5>Не забыть</h5>
+                            <p>Доплаты: экосбор Хон Мун 22 000₫, зона кораллов 60 000₫. Взять: крем от солнца, полотенце, наличные.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Крабовый ужин -->
+            <div class="location-card">
+                <div class="location-header" style="background: linear-gradient(135deg, #fce4ec, #f8bbd0);">
+                    <div class="location-number" style="background: linear-gradient(135deg, #e53935, #c62828);">🦀</div>
+                    <div class="location-title">
+                        <h3>Вечер: Крабовый ужин — ул. Cu Lao Trung</h3>
+                        <div class="location-badges">
+                            <span class="location-badge">Район Бо Ке</span>
+                            <span class="location-badge">Лучшая «улица морепродуктов»</span>
+                        </div>
+                        <div class="location-links">
+                            <a href="https://maps.google.com/?q=Cu+Lao+Trung+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-body">
+                    <p class="location-desc">За мостом через реку Кай — тут едят сами вьетнамцы.</p>
+
+                    <div class="shop-list">
+                        <h4>🍽️ Рестораны:</h4>
+                        <div class="shop-item">
+                            <div class="shop-item-header">
+                                <span class="shop-name">Nhat Phong 3</span>
+                                <span class="shop-tag">Вид на реку</span>
+                            </div>
+                            <p class="shop-desc">63B Cu Lao Trung — ужин на двоих ~$22-25</p>
+                            <div class="location-links">
+                                <a href="https://maps.google.com/?q=Nhat+Phong+3+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                            </div>
+                        </div>
+                        <div class="shop-item">
+                            <div class="shop-item-header">
+                                <span class="shop-name">Bo Ke Restaurant</span>
+                                <span class="shop-tag">У воды</span>
+                            </div>
+                            <p class="shop-desc">42 Cu Lao Trung — прямо у воды</p>
+                            <div class="location-links">
+                                <a href="https://maps.google.com/?q=Bo+Ke+Restaurant+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                            </div>
+                        </div>
+                        <div class="shop-item">
+                            <div class="shop-item-header">
+                                <span class="shop-name">Ben Thuyen</span>
+                                <span class="shop-tag">Лобстеры</span>
+                            </div>
+                            <p class="shop-desc">98C Cu Lao Trung — большой выбор</p>
+                            <div class="location-links">
+                                <a href="https://maps.google.com/?q=Ben+Thuyen+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Морепродукт</th>
+                                <th>Цена за 1 кг</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>🦀 Краб</td>
+                                <td>~220 000₫ ($9)</td>
+                            </tr>
+                            <tr>
+                                <td>🦐 Тигровые креветки</td>
+                                <td>~250 000₫ ($10)</td>
+                            </tr>
+                            <tr>
+                                <td>🦪 Устрицы</td>
+                                <td>100-150 000₫ ($4-6)</td>
+                            </tr>
+                            <tr>
+                                <td>🦞 Лобстер</td>
+                                <td>от 800 000₫ ($32)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="tip-box">
+                        <span class="tip-icon">⚠️</span>
+                        <div class="tip-content">
+                            <h5>Важно</h5>
+                            <p>Цена в меню часто за 100 г, а не за порцию! Просите взвесить при вас.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="section-divider"><span>🌅</span></div>
+
+        <!-- ==================== ДЕНЬ 4 ==================== -->
+        <section id="day4" class="section">
+
+            <div class="day-header" style="background: linear-gradient(135deg, #ffa94d 0%, #ff6b9d 100%);">
+                <h2><i class="fas fa-umbrella-beach"></i> День 4</h2>
+                <p class="day-subtitle">Пляж Док Лет (весь день) + башни По Нагар</p>
+            </div>
+
+            <div class="day-overview">
+                <h3><i class="fas fa-clipboard-list"></i> План дня</h3>
+                <div class="overview-timeline">
+                    <div class="overview-item">
+                        <span class="overview-time">8:00</span>
+                        <span class="overview-place"><i class="fas fa-bus"></i> Автобус №12 или Grab до Док Лет</span>
+                        <span class="overview-duration">1ч</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">9:00</span>
+                        <span class="overview-place"><i class="fas fa-umbrella-beach"></i> Пляж Док Лет — купание, лежаки, морепродукты</span>
+                        <span class="overview-duration">6-7ч</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">16:00</span>
+                        <span class="overview-place"><i class="fas fa-landmark"></i> По пути обратно: башни По Нагар</span>
+                        <span class="overview-duration">30-60 мин</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">18:00</span>
+                        <span class="overview-place"><i class="fas fa-hotel"></i> Возвращение в отель</span>
+                        <span class="overview-duration"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Док Лет -->
+            <div class="location-card">
+                <div class="location-header" style="background: linear-gradient(135deg, #e0f7fa, #b2ebf2);">
+                    <div class="location-number" style="background: linear-gradient(135deg, #00bcd4, #0097a7);">🏖️</div>
+                    <div class="location-title">
+                        <h3>Пляж Док Лет (Doc Let)</h3>
+                        <div class="location-badges">
+                            <span class="location-badge">45-50 км на север</span>
+                            <span class="location-badge">~1 час езды</span>
+                            <span class="location-badge">Один из лучших пляжей</span>
+                        </div>
+                        <div class="location-links">
+                            <a href="https://maps.google.com/?q=Doc+Let+Beach+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-body">
+                    <p class="location-desc">Белоснежный песок, пологий вход, бирюзовая вода, мало людей.</p>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-item-label">Автобус №12</div>
+                            <div class="info-item-value">34-37 000₫, последний обратно 17:35</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-item-label">Такси/Grab туда-обратно</div>
+                            <div class="info-item-value">~750 000₫ ($30)</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-item-label">Лежаки</div>
+                            <div class="info-item-value">50-70 000₫</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-item-label">Вход</div>
+                            <div class="info-item-value">Бесплатный</div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box green">
+                        <span class="tip-icon">🍉</span>
+                        <div class="tip-content">
+                            <h5>Совет</h5>
+                            <p>Мини-рынок морепродуктов слева от входа (10:00-17:00). Возьмите еду/воду с собой для экономии.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- По Нагар -->
+            <div class="location-card">
+                <div class="location-header" style="background: linear-gradient(135deg, #fff8e1, #ffecb3);">
+                    <div class="location-number" style="background: linear-gradient(135deg, #ffa000, #f57c00);">🛕</div>
+                    <div class="location-title">
+                        <h3>Башни По Нагар (Po Nagar)</h3>
+                        <div class="location-badges">
+                            <span class="location-badge">VII-XII века</span>
+                            <span class="location-badge">Индуистский храм</span>
+                        </div>
+                        <div class="location-links">
+                            <a href="https://maps.google.com/?q=Po+Nagar+Cham+Towers+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-body">
+                    <p class="location-desc">Индуистский храмовый комплекс на холме над рекой Кай.</p>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-item-label">Вход</div>
+                            <div class="info-item-value">22 000₫ (~$1)</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-item-label">Время работы</div>
+                            <div class="info-item-value">6:00-18:00</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-item-label">На осмотр</div>
+                            <div class="info-item-value">30-60 минут</div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box blue">
+                        <span class="tip-icon">👗</span>
+                        <div class="tip-content">
+                            <h5>Дресс-код</h5>
+                            <p>Нужна закрытая одежда (на месте бесплатно дают туники).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="section-divider"><span>⛩️</span></div>
+
+        <!-- ==================== ДЕНЬ 5 ==================== -->
+        <section id="day5" class="section">
+
+            <div class="day-header" style="background: linear-gradient(135deg, #26a69a 0%, #00796b 100%);">
+                <h2><i class="fas fa-mountain"></i> День 5</h2>
+                <p class="day-subtitle">Пляж Бай Зыонг + мыс Хон Чонг + Пагода Лонг Шон</p>
+            </div>
+
+            <div class="day-overview">
+                <h3><i class="fas fa-clipboard-list"></i> План дня</h3>
+                <div class="overview-timeline">
+                    <div class="overview-item">
+                        <span class="overview-time">8:00</span>
+                        <span class="overview-place"><i class="fas fa-umbrella-beach"></i> Пляж Бай Зыонг — купание</span>
+                        <span class="overview-duration">3ч</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">11:00</span>
+                        <span class="overview-place"><i class="fas fa-mountain"></i> Мыс Хон Чонг — фото + виды</span>
+                        <span class="overview-duration">30 мин</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">12:00</span>
+                        <span class="overview-place"><i class="fas fa-utensils"></i> Обед</span>
+                        <span class="overview-duration">1ч</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">14:00</span>
+                        <span class="overview-place"><i class="fas fa-place-of-worship"></i> Пагода Лонг Шон — Будда + панорама</span>
+                        <span class="overview-duration">1ч</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">15:30</span>
+                        <span class="overview-place"><i class="fas fa-church"></i> Кафедральный собор Нячанга</span>
+                        <span class="overview-duration">15 мин</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">Вечер</span>
+                        <span class="overview-place"><i class="fas fa-walking"></i> Прогулка по набережной + массаж</span>
+                        <span class="overview-duration"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Бай Зыонг -->
+            <div class="location-card">
+                <div class="location-header" style="background: linear-gradient(135deg, #e0f2f1, #b2dfdb);">
+                    <div class="location-number" style="background: linear-gradient(135deg, #26a69a, #00796b);">🏖️</div>
+                    <div class="location-title">
+                        <h3>Пляж Бай Зыонг (Bai Duong)</h3>
+                        <div class="location-badges">
+                            <span class="location-badge">К северу от центра</span>
+                            <span class="location-badge">10 мин на Grab</span>
+                        </div>
+                        <div class="location-links">
+                            <a href="https://maps.google.com/?q=Bai+Duong+Beach+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-body">
+                    <p class="location-desc">Спокойный пляж — чище и тише центрального, мало торговцев, прозрачная вода. Мало туристов, отличное место для купания. Рядом есть кафе с морепродуктами.</p>
+                </div>
+            </div>
+
+            <!-- Хон Чонг -->
+            <div class="location-card">
+                <div class="location-header" style="background: linear-gradient(135deg, #f3e5f5, #e1bee7);">
+                    <div class="location-number" style="background: linear-gradient(135deg, #ab47bc, #7b1fa2);">🪨</div>
+                    <div class="location-title">
+                        <h3>Мыс Хон Чонг (Hon Chong Promontory)</h3>
+                        <div class="location-badges">
+                            <span class="location-badge">📸 Фототочка</span>
+                            <span class="location-badge">~22 000₫ вход</span>
+                        </div>
+                        <div class="location-links">
+                            <a href="https://maps.google.com/?q=Hon+Chong+Promontory+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-body">
+                    <p class="location-desc">Живописные валуны у моря, красивый вид на залив и острова. 15-20 минут на осмотр + фотографии.</p>
+                </div>
+            </div>
+
+            <!-- Лонг Шон -->
+            <div class="location-card">
+                <div class="location-header" style="background: linear-gradient(135deg, #fff8e1, #ffecb3);">
+                    <div class="location-number" style="background: linear-gradient(135deg, #ffd54f, #ffb300);">🛕</div>
+                    <div class="location-title">
+                        <h3>Пагода Лонг Шон (Long Son Pagoda)</h3>
+                        <div class="location-badges">
+                            <span class="location-badge">Бесплатно</span>
+                            <span class="location-badge">30-45 мин</span>
+                        </div>
+                        <div class="location-links">
+                            <a href="https://maps.google.com/?q=Long+Son+Pagoda+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-body">
+                    <p class="location-desc">24-метровая белая статуя Будды на холме. 150 ступеней наверх — панорама всего Нячанга. Бесплатный вход.</p>
+                </div>
+            </div>
+
+            <!-- Собор -->
+            <div class="location-card">
+                <div class="location-header" style="background: linear-gradient(135deg, #e8eaf6, #c5cae9);">
+                    <div class="location-number" style="background: linear-gradient(135deg, #5c6bc0, #3949ab);">⛪</div>
+                    <div class="location-title">
+                        <h3>Кафедральный собор Нячанга</h3>
+                        <div class="location-badges">
+                            <span class="location-badge">Бесплатно</span>
+                            <span class="location-badge">15 мин</span>
+                            <span class="location-badge">10 мин пешком от Лонг Шон</span>
+                        </div>
+                        <div class="location-links">
+                            <a href="https://maps.google.com/?q=Nha+Trang+Cathedral" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-body">
+                    <p class="location-desc">Готическая церковь 1933 года, витражи, колокольня.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="section-divider"><span>🌺</span></div>
+
+        <!-- ==================== ДЕНЬ 6 ==================== -->
+        <section id="day6" class="section">
+
+            <div class="day-header" style="background: linear-gradient(135deg, #ff6b9d 0%, #ffa94d 100%);">
+                <h2><i class="fas fa-sun"></i> День 6</h2>
+                <p class="day-subtitle">Центральный пляж + Marina Beach Club + прощальный шопинг</p>
+            </div>
+
+            <div class="day-overview">
+                <h3><i class="fas fa-clipboard-list"></i> План дня</h3>
+                <div class="overview-timeline">
+                    <div class="overview-item">
+                        <span class="overview-time">9:00</span>
+                        <span class="overview-place"><i class="fas fa-umbrella-beach"></i> Центральный пляж Чан Фу — лежаки, купание</span>
+                        <span class="overview-duration">весь день</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">16:00</span>
+                        <span class="overview-place"><i class="fas fa-cocktail"></i> Marina Beach Club — качели в море, закат</span>
+                        <span class="overview-duration">3ч</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-time">19:00</span>
+                        <span class="overview-place"><i class="fas fa-shopping-bag"></i> Прощальный шопинг + ужин</span>
+                        <span class="overview-duration">2-3ч</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Центральный пляж -->
+            <div class="location-card">
+                <div class="location-header" style="background: linear-gradient(135deg, #fff3e0, #ffe0b2);">
+                    <div class="location-number" style="background: linear-gradient(135deg, #ffa726, #f57c00);">🏖️</div>
+                    <div class="location-title">
+                        <h3>Центральный пляж Чан Фу (Tran Phu)</h3>
+                        <div class="location-badges">
+                            <span class="location-badge">Набережная 7 км</span>
+                            <span class="location-badge">Лежаки 50-100 000₫</span>
+                        </div>
+                        <div class="location-links">
+                            <a href="https://maps.google.com/?q=Tran+Phu+Beach+Nha+Trang" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-body">
+                    <p class="location-desc">Расслабленный пляжный день — лежаки, купание, коктейли. Можно взять SUP, каяк или покататься на гидроцикле.</p>
+                </div>
+            </div>
+
+            <!-- Marina Beach Club -->
+            <div class="location-card">
+                <div class="location-header" style="background: linear-gradient(135deg, #fce4ec, #f8bbd0);">
+                    <div class="location-number" style="background: linear-gradient(135deg, #ff6b9d, #e91e63);">🎡</div>
+                    <div class="location-title">
+                        <h3>Marina Beach Club</h3>
+                        <div class="location-badges">
+                            <span class="location-badge">Качели в море</span>
+                            <span class="location-badge">Живая музыка</span>
+                            <span class="location-badge">Частный пляж</span>
+                        </div>
+                        <div class="location-links">
+                            <a href="https://maps.google.com/?q=Marina+Beach+Club+Nha+Trang+Nguyen+Co+Thach" target="_blank" class="location-link maps"><i class="fas fa-map-marker-alt"></i> Карта</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-body">
+                    <p class="location-desc">Качели прямо в море, частный пляж без волн, живая музыка.</p>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-item-label">Адрес</div>
+                            <div class="info-item-value">Nguyen Co Thach Street, Vinh Hoa</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-item-label">Вход</div>
+                            <div class="info-item-value">100 000₫ (~$4) — лежак + зонт + вода</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-item-label">Grab из центра</div>
+                            <div class="info-item-value">~100 000₫ (15-20 мин)</div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <span class="tip-icon">🌅</span>
+                        <div class="tip-content">
+                            <h5>Совет</h5>
+                            <p>Приезжайте к закату — лучший вид на залив!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Прощальный шопинг -->
+            <div class="location-card">
+                <div class="location-header" style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9);">
+                    <div class="location-number" style="background: linear-gradient(135deg, #66bb6a, #43a047);">🎁</div>
+                    <div class="location-title">
+                        <h3>Вечер: Прощальный шопинг и ужин</h3>
+                    </div>
+                </div>
+                <div class="location-body">
+                    <div class="shop-list">
+                        <h4>🛒 Что купить домой:</h4>
+                        <div class="shop-item">
+                            <div class="shop-item-header">
+                                <span class="shop-name">Рынок Чо Дам / Сом Мой</span>
+                                <span class="shop-tag">Сувениры</span>
+                            </div>
+                            <p class="shop-desc">Фрукты, кофе, сувениры домой</p>
+                        </div>
+                        <div class="shop-item">
+                            <div class="shop-item-header">
+                                <span class="shop-name">Lotte Mart / GO!</span>
+                                <span class="shop-tag">Подарки</span>
+                            </div>
+                            <p class="shop-desc">Упакованный кофе, манговое желе, сушёные фрукты — отличные подарки</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-box green">
+                        <span class="tip-icon">🍽️</span>
+                        <div class="tip-content">
+                            <h5>Прощальный ужин</h5>
+                            <p>Sailing Club на центральном пляже или снова на Cu Lao Trung.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="section-divider"><span>✈️</span></div>
+
+        <!-- ==================== ПОЛЕЗНАЯ ИНФОРМАЦИЯ ==================== -->
+        <section class="section">
+            <div class="useful-section">
+                <h3><i class="fas fa-info-circle"></i> Полезная информация</h3>
+                <div class="useful-grid">
+                    <div class="useful-card">
+                        <h4><i class="fas fa-taxi"></i> Транспорт</h4>
+                        <ul>
+                            <li><strong>Grab</strong> — главное приложение, дешевле и без торга</li>
+                            <li><strong>Автобусы</strong> — 7 000-37 000₫, ходят до 18:00-19:00</li>
+                            <li><strong>Байк</strong> — 100-150 000₫/день ($5-7)</li>
+                        </ul>
+                    </div>
+                    <div class="useful-card">
+                        <h4><i class="fas fa-money-bill-wave"></i> Деньги</h4>
+                        <ul>
+                            <li>1 USD = 24 000-25 000₫</li>
+                            <li>1 000₫ = 2,5-3 рубля</li>
+                            <li>Платите в донгах — доллары невыгодно</li>
+                        </ul>
+                    </div>
+                    <div class="useful-card">
+                        <h4><i class="fas fa-utensils"></i> Еда</h4>
+                        <ul>
+                            <li>Средний обед: 100-200 000₫ ($4-8)</li>
+                            <li>Морепродукты дешевле в местных quan на боковых улицах</li>
+                            <li>Фрукты — рынок Чо Дам или Сом Мой</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
     </main>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Footer -->
     <footer class="footer">
@@ -78,5 +1513,34 @@
         </div>
     </footer>
 
+    <script>
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Smooth scroll for day navigation
+        document.querySelectorAll('.day-nav-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = document.querySelector('.nav').offsetHeight;
+                    const targetPosition = target.offsetTop - navHeight - 20;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
